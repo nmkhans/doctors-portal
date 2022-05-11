@@ -7,3 +7,11 @@
 .nav__link {
     padding: 10px;
 }
+
+.menu li div:active {
+    background: none;
+}
+
+.menu li div:hover {
+    background: none;
+}
