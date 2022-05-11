@@ -1,7 +1,7 @@
 .nav__active {
-    background: #3A4256;
+    background: #0FCFEC;
     padding: 10px;
-    color: #D4D9E3;
+    color: #fff;
     border-radius: 5px;
 }
 .nav__link {
