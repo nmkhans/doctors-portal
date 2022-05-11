@@ -6,7 +6,7 @@ import phone from './phone.svg';
 
 const Info = () => {
     return (
-        <div className="Info grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 p-5">
+        <div className="Info grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 p-10">
             <InfoCard icon={clock}
             bg="bg-primary"
             title="Opening Hours"
