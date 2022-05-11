@@ -1,20 +1,31 @@
 import React from 'react';
+import './Header.css';
 import { Link } from 'react-router-dom';
+import LinkTo from './../LinkTo/LinkTo';
 
 const Header = () => {
     return (
-        <div className="Header">
-            <div className="inner__header container">
-                <div className="header__content">
-                    <div className="header__logo">
-                        <Link to="/">Doctors Portal</Link>
-                    </div>
-                    <nav className="header__nav">
-                        <div className="header__menu">
-                            <button className="btn btn-primary text-white">click me</button>
-                        </div>
-                    </nav>
+        <div className="navbar bg-base-100">
+            <div className="navbar-start">
+                <div className="dropdown">
+                    <label tabindex="0" className="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                    </label>
+                    <ul tabindex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><LinkTo to="/">Home</LinkTo></li>
+                        <li><LinkTo to="/appoinement">Appointment</LinkTo></li>
+                    </ul>
                 </div>
+                <Link to="/" className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+            </div>
+            <div className="navbar-center hidden lg:flex">
+                <ul className="menu menu-horizontal p-0">
+                    <li><LinkTo to="/">Home</LinkTo></li>
+                    <li><LinkTo to="/appointment">Appointment</LinkTo></li>
+                </ul>
+            </div>
+            <div className="navbar-end">
+                <Link to="/" className="btn">Get started</Link>
             </div>
         </div>
     );

@@ -1,0 +1,6 @@
+.nav__active {
+    background: #3A4256;
+    color: #D4D9E3;
+    /* padding: 10px; */
+    border-radius: 5px;
+}
