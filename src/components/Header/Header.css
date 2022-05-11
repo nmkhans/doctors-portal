@@ -1,6 +1,9 @@
 .nav__active {
     background: #3A4256;
+    padding: 10px;
     color: #D4D9E3;
-    /* padding: 10px; */
     border-radius: 5px;
+}
+.nav__link {
+    padding: 10px;
 }

@@ -7,7 +7,7 @@ const LinkTo = ({ children, to, ...props }) => {
     return (
         <div>
             <Link
-                className={match ? "nav__active" : ""}
+                className={match ? "nav__active" : "nav__link"}
                 to={to}
                 {...props}
             >

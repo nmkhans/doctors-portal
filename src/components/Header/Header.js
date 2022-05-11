@@ -16,16 +16,16 @@ const Header = () => {
                         <li><LinkTo to="/appoinement">Appointment</LinkTo></li>
                     </ul>
                 </div>
-                <Link to="/" className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+                <Link to="/" className="btn btn-ghost normal-case text-xl">Doctors Portal</Link>
             </div>
-            <div className="navbar-center hidden lg:flex">
+            <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
                     <li><LinkTo to="/">Home</LinkTo></li>
                     <li><LinkTo to="/appointment">Appointment</LinkTo></li>
+                    <li><LinkTo to="/review">Review</LinkTo></li>
+                    <li><LinkTo to="/contact-us">Contact Us</LinkTo></li>
+                    <li><LinkTo to="/login">Login</LinkTo></li>
                 </ul>
-            </div>
-            <div className="navbar-end">
-                <Link to="/" className="btn">Get started</Link>
             </div>
         </div>
     );
