@@ -4,7 +4,7 @@ import ActionButton from './../ActionButton/ActionButton';
 
 const ServiceFeature = () => {
     return (
-        <div className="hero min-h-screen">
+        <div className="hero min-h-screen pb-20">
             <div className="hero-content w-10/12 flex-col lg:flex-row justify-evenly">
                 <img src={img} className="max-w-sm rounded-lg shadow-2xl" alt="" />
                 <div className="w-6/12">
