@@ -3,6 +3,13 @@ import { format } from 'date-fns';
 
 const BookingModal = ({ treatment, date }) => {
     const { name, slots } = treatment;
+    const handleAppointment = (event) => {
+        event.preventDefault();
+        const slot = event.target.slot.value;
+        const name = event.target.name.value;
+        const email = event.target.email.value;
+        const phone = event.target.phone.value;
+    }
 
     return (
         <div>
@@ -11,8 +18,8 @@ const BookingModal = ({ treatment, date }) => {
                 <div className="modal-box">
                     <label htmlFor="booking-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="font-bold text-lg">Booking for: {name}</h3>
-                    <form className="grid grid-cols-1 gap-5 justify-items-center mt-5">
-                        <input type="text" name="date" defaultValue={format(date, "PP")} disabled class="input input-bordered input-bordered w-full max-w-xs" />
+                    <form onSubmit={handleAppointment} className="grid grid-cols-1 gap-5 justify-items-center mt-5">
+                        <input type="text" defaultValue={format(date, "PP")} disabled class="input input-bordered input-bordered w-full max-w-xs" />
                         <select name="slot" class="select select-bordered w-full max-w-xs">
                             {
                                 slots.map(slot => <option value={slot}>{slot}</option>)
