@@ -11,7 +11,7 @@ const AvailableAppointment = ({ date }) => {
 
     //? load all services
     useEffect(() => {
-        fetch('https://raw.githubusercontent.com/ProgrammingHero1/doctors-portal-client-module-75/main/public/services.json')
+        fetch('http://localhost:5000/appointment')
         .then(res => res.json())
         .then(data => setServices(data));
     }, [])
