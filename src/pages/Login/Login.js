@@ -15,6 +15,10 @@ const Login = () => {
         signInWithGoogle();
     }
 
+    if (user) {
+        console.log(user)
+    }
+
     return (
         <div className="Login flex justify-center items-center h-screen">
             <div class="card w-96 bg-base-100 shadow-xl">
