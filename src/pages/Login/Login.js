@@ -1,31 +1,44 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import auth from './../../firebase.init';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 
 const Login = () => {
 
+    const { register, formState: { errors }, handleSubmit } = useForm();
+
     const [
         signInWithGoogle,
+        googleuser,
+        googleloading,
+        googleerror
+    ] = useSignInWithGoogle(auth);
+
+    const [
+        signInWithEmailAndPassword,
         user,
         loading,
-        error
-    ] = useSignInWithGoogle(auth);
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+
+    if(loading || googleloading) {
+        return <p>Loading</p>
+    }
+
+    let errorMessage;
+    if(error || googleerror) {
+        errorMessage = <p className="text-red-500 text-center">{error?.message || googleerror?.message}</p>
+    }
 
     const handleGoogleLogin = (event) => {
         event.preventDefault();
         signInWithGoogle();
     }
 
-    const { register, formState: { errors }, handleSubmit } = useForm();
-    
     const onSubmit = data => {
-        console.log(data)
+        signInWithEmailAndPassword(data.email, data.password)
     };
-
-    if (user) {
-        console.log(user)
-    }
 
     return (
         <div className="Login flex justify-center items-center h-screen">
@@ -85,6 +98,7 @@ const Login = () => {
                                 </p>}
                             </label>
                         </div>
+                        {errorMessage}
                         <input className="btn btn-accent w-full text-white mt-5" type="submit" value="Login" />
                     </form>
                     <div className="divider">OR</div>
