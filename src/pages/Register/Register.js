@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import auth from './../../firebase.init';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useEffect } from 'react';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -26,6 +27,12 @@ const Register = () => {
         googleerror
     ] = useSignInWithGoogle(auth);
 
+    useEffect(() => {
+        if (user || googleuser) {
+            navigate(from, { replace: true });
+        }
+    }, [from, googleuser, navigate, user])
+
     if (loading || googleloading || updating) {
         return <p>Loading</p>
     }
@@ -33,11 +40,7 @@ const Register = () => {
     let errorMessage;
     if (error || googleerror) {
         errorMessage = <p className="text-red-500 text-center">{error?.message || googleerror?.message}</p>
-    }
-
-    if (user || googleuser) {
-        navigate(from, { replace: true });
-    }
+    } navigate(from, { replace: true });
 
     const handleGoogleLogin = (event) => {
         event.preventDefault();

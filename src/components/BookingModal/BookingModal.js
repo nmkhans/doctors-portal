@@ -1,7 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { format } from 'date-fns';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from './../../firebase.init';
 
 const BookingModal = ({ treatment, date }) => {
+    const [user] = useAuthState(auth);
     const { name, slots } = treatment;
     const handleAppointment = (event) => {
         event.preventDefault();
@@ -16,20 +20,20 @@ const BookingModal = ({ treatment, date }) => {
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box">
-                    <label htmlFor="booking-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 className="font-bold text-lg">Booking for: {name}</h3>
                     <form onSubmit={handleAppointment} className="grid grid-cols-1 gap-5 justify-items-center mt-5">
-                        <input type="text" defaultValue={format(date, "PP")} disabled class="input input-bordered input-bordered w-full max-w-xs" />
-                        <select name="slot" class="select select-bordered w-full max-w-xs">
+                        <input type="text" defaultValue={format(date, "PP")} disabled className="input input-bordered input-bordered w-full max-w-xs" />
+                        <select name="slot" className="select select-bordered w-full max-w-xs">
                             {
-                                slots.map(slot => <option value={slot}>{slot}</option>)
+                                slots.map((slot, index) => <option key={index} value={slot}>{slot}</option>)
                             }
                         </select>
                         <input type="text"
-                        name="name" placeholder="Name" class="input input-bordered input-bordered w-full max-w-xs" />
-                        <input type="email" name="email" placeholder="Email" class="input input-bordered input-bordered w-full max-w-xs" />
-                        <input type="text" name="phone" placeholder="Phone" class="input input-bordered input-bordered w-full max-w-xs" />
-                        <input type="submit" value="Submit" class="btn btn-secondary text-white w-full max-w-xs" />
+                        name="name" disabled defaultValue={user?.displayName} className="input input-bordered input-bordered w-full max-w-xs" />
+                        <input type="email" name="email" disabled defaultValue={user?.email} className="input input-bordered input-bordered w-full max-w-xs" />
+                        <input type="text" name="phone" placeholder="Phone" className="input input-bordered input-bordered w-full max-w-xs" />
+                        <input type="submit" value="Submit" className="btn btn-secondary text-white w-full max-w-xs" />
                     </form>
                 </div>
             </div>
