@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import auth from './../../firebase.init';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
@@ -9,6 +9,8 @@ const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || '/';
 
     const [
         createUserWithEmailAndPassword,
@@ -33,8 +35,8 @@ const Register = () => {
         errorMessage = <p className="text-red-500 text-center">{error?.message || googleerror?.message}</p>
     }
 
-    if(user || googleuser) {
-        console.log(user || googleuser)
+    if (user || googleuser) {
+        navigate(from, { replace: true });
     }
 
     const handleGoogleLogin = (event) => {
@@ -47,8 +49,7 @@ const Register = () => {
         const email = data.email;
         const password = data.password;
         await createUserWithEmailAndPassword(email, password)
-        await updateProfile({displayName: name});
-        navigate('/home');
+        await updateProfile({ displayName: name });
     };
 
     return (
