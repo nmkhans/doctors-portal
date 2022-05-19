@@ -48,7 +48,7 @@ const Register = () => {
         const password = data.password;
         await createUserWithEmailAndPassword(email, password)
         await updateProfile({displayName: name});
-        navigate('/appointment');
+        navigate('/home');
     };
 
     return (
