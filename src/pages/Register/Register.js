@@ -1,13 +1,19 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import auth from './../../firebase.init';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import auth from './../../firebase.init';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 
-const Login = () => {
-
+const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
 
     const [
         signInWithGoogle,
@@ -15,13 +21,6 @@ const Login = () => {
         googleloading,
         googleerror
     ] = useSignInWithGoogle(auth);
-
-    const [
-        signInWithEmailAndPassword,
-        user,
-        loading,
-        error,
-    ] = useSignInWithEmailAndPassword(auth);
 
     if (loading || googleloading) {
         return <p>Loading</p>
@@ -38,16 +37,34 @@ const Login = () => {
     }
 
     const onSubmit = data => {
-        signInWithEmailAndPassword(data.email, data.password)
+        createUserWithEmailAndPassword(data.email, data.password)
     };
 
     return (
-        <div className="Login flex justify-center items-center h-screen">
+        <div className="Register flex justify-center items-center h-screen">
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
-                    <h2 className="card-title justify-center">Login</h2>
+                    <h2 className="card-title justify-center">Register</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input
+                                type="text"
+                                className="input input-bordered w-full max-w-xs"
+                                {...register("name", {
+                                    required: {
+                                        value: true,
+                                        message: 'Name is required',
+                                    }
+                                })}
+                            />
+                            <label>
+                                {errors.name?.type === 'required' && <p className="font-semibold text-red-500">
+                                    {errors.name.message}
+                                </p>}
+                            </label>
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
@@ -100,9 +117,9 @@ const Login = () => {
                             </label>
                         </div>
                         {errorMessage}
-                        <input className="btn btn-accent w-full text-white mt-5" type="submit" value="Login" />
+                        <input className="btn btn-accent w-full text-white mt-5" type="submit" value="Register" />
                     </form>
-                    <p className="text-center text-sm m-3">New to Doctors Portal? <Link className="text-primary" to="/register">Create new account.</Link></p>
+                    <p className="text-center text-sm m-3">Already have account? <Link className="text-primary" to="/login">Login</Link></p>
                     <div className="divider">OR</div>
                     <button onClick={handleGoogleLogin} className="btn btn-outline">Continue with google</button>
                 </div>
@@ -111,4 +128,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
