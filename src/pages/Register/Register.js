@@ -3,10 +3,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import auth from './../../firebase.init';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
     const [
         createUserWithEmailAndPassword,
@@ -22,7 +23,7 @@ const Register = () => {
         googleerror
     ] = useSignInWithGoogle(auth);
 
-    if (loading || googleloading) {
+    if (loading || googleloading || updating) {
         return <p>Loading</p>
     }
 
@@ -31,13 +32,21 @@ const Register = () => {
         errorMessage = <p className="text-red-500 text-center">{error?.message || googleerror?.message}</p>
     }
 
+    if(user || googleuser) {
+        console.log(user || googleuser)
+    }
+
     const handleGoogleLogin = (event) => {
         event.preventDefault();
         signInWithGoogle();
     }
 
-    const onSubmit = data => {
-        createUserWithEmailAndPassword(data.email, data.password)
+    const onSubmit = async data => {
+        const name = data.name;
+        const email = data.email;
+        const password = data.password;
+        await createUserWithEmailAndPassword(email, password)
+        await updateProfile({displayName: name});
     };
 
     return (
