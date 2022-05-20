@@ -14,7 +14,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
         event.preventDefault();
         const slot = event.target.slot.value;
         const phone = event.target.phone.value;
-
+        
         const booking = {
             treatmentId: _id,
             treatment: name,
@@ -24,6 +24,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
             patientName: user.displayName,
             phone: phone,
         }
+        console.log(booking)
 
         fetch('http://localhost:5000/booking', {
             method: 'POST',
