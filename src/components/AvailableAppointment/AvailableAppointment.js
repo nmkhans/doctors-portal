@@ -15,6 +15,7 @@ const AvailableAppointment = ({ date }) => {
         .then(res => res.json())
         .then(data => setServices(data));
     }, [])
+
     return (
         <div className="AvailableAppointment p-12">
             <div className="AvailableAppointment__title">
@@ -25,7 +26,7 @@ const AvailableAppointment = ({ date }) => {
                     services.map(service => <AppointmentService key={service._id} service={service} setTreatment={setTreatment} />)
                 }
                 {
-                    treatment && <BookingModal date={date} treatment={treatment} />
+                    treatment && <BookingModal date={date} treatment={treatment} setTreatment={setTreatment} />
                 }
             </div>
         </div>

@@ -12,3 +12,7 @@
 img {
     max-width: 100%;
 }
+
+.Toastify__progress-bar {
+    background: blue !important;
+}
