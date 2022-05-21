@@ -17,7 +17,6 @@ const Dashboard = () => {
                         <li><LinkTo to="/dashboard">MyAppointents</LinkTo></li>
                         <li><LinkTo to="/dashboard/account">My Account</LinkTo></li>
                     </ul>
-
                 </div>
             </div>
         </div>
