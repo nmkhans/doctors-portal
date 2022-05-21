@@ -30,7 +30,7 @@ const Register = () => {
 
     useEffect(() => {
         if (token) {
-            // navigate(from, { replace: true });
+            navigate(from, { replace: true });
         }
     }, [from, navigate, token])
 
