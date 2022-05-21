@@ -11,6 +11,11 @@ const Header = () => {
     const [user] = useAuthState(auth);
     const location = useLocation();
 
+    const signOutUser = () => {
+        signOut(auth);
+        localStorage.removeItem('accessToken');
+    }
+
     const MenuItems = () => {
         return (
             <>
@@ -19,7 +24,7 @@ const Header = () => {
                 <li><LinkTo to="/review">Review</LinkTo></li>
                 <li><LinkTo to="/contact-us">Contact</LinkTo></li>
                 <li>{user && <LinkTo to="/dashboard">Dashboard</LinkTo>}</li>
-                <li>{user ? <button onClick={() => signOut(auth)} className="btn btn-ghost mt-3">Sign Out</button> : <LinkTo to="/login">Login</LinkTo>}</li>
+                <li>{user ? <button onClick={signOutUser} className="btn btn-ghost mt-3">Sign Out</button> : <LinkTo to="/login">Login</LinkTo>}</li>
             </>
         )
     }
