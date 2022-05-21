@@ -6,7 +6,7 @@ import auth from './../../firebase.init';
 const MyAppointments = () => {
 
     const [user] = useAuthState(auth);
-    const { data: appointments, isLoading, refetch } = useQuery(['user-booking', user], () => (
+    const { data: appointments, isLoading } = useQuery(['user-booking', user], () => (
         fetch(`http://localhost:5000/booking?email=${user.email}`)
             .then(res => res.json())
     ))
@@ -18,6 +18,7 @@ const MyAppointments = () => {
     return (
         <div>
             <h3>This is my appointment</h3>
+            <p>Available Appointments: {appointments.length}</p>
         </div>
     );
 };
