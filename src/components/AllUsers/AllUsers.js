@@ -6,7 +6,7 @@ import { signOut } from 'firebase/auth';
 
 const AllUsers = () => {
 
-    const { data: users, isLoading } = useQuery('users', () => (
+    const { data: users, isLoading, refetch } = useQuery('users', () => (
         fetch(`http://localhost:5000/users`, {
             method: "GET",
             headers: {
@@ -29,7 +29,7 @@ const AllUsers = () => {
     return (
         <div>
             <h3 className='text-2xl my-5'>All users</h3>
-            <UsersTable users={users} />
+            <UsersTable users={users} refetch={refetch} />
         </div>
     );
 };

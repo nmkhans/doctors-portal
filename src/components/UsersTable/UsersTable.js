@@ -1,6 +1,22 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
-const UsersTable = ({ users }) => {
+const UsersTable = ({ users, refetch }) => {
+
+    const handleRole = (email) => {
+        fetch(`http://localhost:5000/user/admin/${email}`, {
+            method: "PUT",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                refetch();
+                toast.success('role update successfull')
+            })
+    }
+
     return (
         <div className="UsersTable">
             <div className="overflow-x-auto">
@@ -19,7 +35,7 @@ const UsersTable = ({ users }) => {
                                 <tr key={user._id}>
                                     <td>{user._id}</td>
                                     <td>{user.email}</td>
-                                    <td><button className="btn btn-sm">Make Admin</button></td>
+                                    <td>{(user.role !== 'admin') && (<button onClick={() => handleRole(user.email)} className="btn btn-sm">Make Admin</button>)}</td>
                                     <td><button className="btn btn-sm">Remove User</button></td>
                                 </tr>
                             ))
