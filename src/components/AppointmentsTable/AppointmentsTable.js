@@ -15,7 +15,7 @@ const AppointmentsTable = ({ appointments }) => {
                     </thead>
                     <tbody>
                         {
-                            appointments.map(appo => (
+                            appointments?.map(appo => (
                                 <tr key={appo._id}>
                                     <td>{appo.patientName}</td>
                                     <td>{appo.treatment}</td>
