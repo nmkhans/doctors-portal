@@ -15,6 +15,7 @@ const Dashboard = () => {
                     <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
                         <li><LinkTo to="/dashboard">My Appointents</LinkTo></li>
                         <li><LinkTo to="/dashboard/account">My Account</LinkTo></li>
+                        <li><LinkTo to="/dashboard/all-users">All Users</LinkTo></li>
                     </ul>
                 </div>
             </div>
