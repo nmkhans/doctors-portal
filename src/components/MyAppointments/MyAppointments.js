@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './../../firebase.init';
+import AppointmentsTable from '../AppointmentsTable/AppointmentsTable';
 
 const MyAppointments = () => {
 
@@ -19,6 +20,7 @@ const MyAppointments = () => {
         <div>
             <h3>This is my appointment</h3>
             <p>Available Appointments: {appointments.length}</p>
+            <AppointmentsTable />
         </div>
     );
 };
