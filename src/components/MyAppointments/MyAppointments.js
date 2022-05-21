@@ -15,12 +15,12 @@ const MyAppointments = () => {
     if (isLoading) {
         return <h3>Loading</h3>
     }
+    console.log(appointments)
 
     return (
         <div>
-            <h3>This is my appointment</h3>
-            <p>Available Appointments: {appointments.length}</p>
-            <AppointmentsTable />
+            <h3 className='text-2xl my-5'>My Appointments</h3>
+            <AppointmentsTable appointments={appointments} />
         </div>
     );
 };
