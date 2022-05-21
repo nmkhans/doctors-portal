@@ -5,6 +5,9 @@ import Home from './../Home/Home';
 import Appointment from './../Appointment/Appointment';
 import Register from './../Register/Register';
 import RequireAuth from '../../components/RequireAuth/RequireAuth';
+import Dashboard from './../../components/Dashboard/Dashboard';
+import MyAppointments from './../../components/MyAppointments/MyAppointments';
+import Account from './../../components/Account/Account';
 
 
 const ApplicationRoutes = () => {
@@ -16,6 +19,14 @@ const ApplicationRoutes = () => {
                     <Appointment />
                 </RequireAuth>
             } />
+            <Route path="/dashboard" element={
+                <RequireAuth>
+                    <Dashboard />
+                </RequireAuth>
+            }>
+                <Route index element={<MyAppointments />} />
+                <Route path="account" element={<Account />} />
+            </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
         </Routes>
