@@ -9,6 +9,7 @@ import Dashboard from './../../components/Dashboard/Dashboard';
 import MyAppointments from './../../components/MyAppointments/MyAppointments';
 import Account from './../../components/Account/Account';
 import AllUsers from './../../components/AllUsers/AllUsers';
+import AddDoctor from './../../components/AddDoctor/AddDoctor';
 
 
 const ApplicationRoutes = () => {
@@ -28,6 +29,7 @@ const ApplicationRoutes = () => {
                 <Route index element={<MyAppointments />} />
                 <Route path="account" element={<Account />} />
                 <Route path="all-users" element={<AllUsers />} />
+                <Route path="add-doctor" element={<AddDoctor />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

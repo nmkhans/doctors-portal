@@ -1,8 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import LinkTo from './../LinkTo/LinkTo';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from './../../firebase.init';
+import useAdmin from './../../hooks/useAdmin';
 
 const Dashboard = () => {
+    const [user] = useAuthState(auth);
+    const { admin } = useAdmin(user);
+
     return (
         <div className="Dashboard">
             <div className="drawer drawer-mobile">
@@ -15,7 +21,12 @@ const Dashboard = () => {
                     <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
                         <li><LinkTo to="/dashboard">My Appointents</LinkTo></li>
                         <li><LinkTo to="/dashboard/account">My Account</LinkTo></li>
-                        <li><LinkTo to="/dashboard/all-users">All Users</LinkTo></li>
+                        {admin && (
+                            <>
+                                <li><LinkTo to="/dashboard/all-users">All Users</LinkTo></li>
+                                <li><LinkTo to="/dashboard/add-doctor">Add a Doctor</LinkTo></li>
+                            </>
+                        )}
                     </ul>
                 </div>
             </div>

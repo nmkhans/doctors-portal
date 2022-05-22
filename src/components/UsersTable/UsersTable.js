@@ -7,13 +7,21 @@ const UsersTable = ({ users, refetch }) => {
         fetch(`http://localhost:5000/user/admin/${email}`, {
             method: "PUT",
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                "authorization": `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 403) {
+                    toast.error('Failed to update role')
+                }
+                return res.json()
+            })
             .then(data => {
-                refetch();
-                toast.success('role update successfull')
+                if (data.updateCount) {
+                    refetch();
+                    toast.success('role update successfull')
+                }
             })
     }
 
