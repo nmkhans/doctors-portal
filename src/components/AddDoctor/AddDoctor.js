@@ -2,6 +2,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 
 const AddDoctor = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -12,27 +13,40 @@ const AddDoctor = () => {
     const imgAPI = "4ef6064f92cecc9354940bb42dad244d";
 
     const onSubmit = async data => {
-    const img = data.image[0];
-    const formData = new FormData();
-    formData.append('image', img);
-    const url = `https://api.imgbb.com/1/upload?key=${imgAPI}`;
-    fetch(url, {
-        method: "POST",
-        body: formData
-    })
-    .then(res => res.json())
-    .then(result => {
-        if(result.success) {
-            const img = result.data.url;
-            const doctor = {
-                name: data.name,
-                email: data.email,
-                speciality: data.specialization,
-                img: img
-            }
-            console.log(doctor)
-        }
-    })
+        const img = data.image[0];
+        const formData = new FormData();
+        formData.append('image', img);
+        const url = `https://api.imgbb.com/1/upload?key=${imgAPI}`;
+        fetch(url, {
+            method: "POST",
+            body: formData
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    const img = result.data.url;
+                    const doctor = {
+                        name: data.name,
+                        email: data.email,
+                        speciality: data.specialization,
+                        img: img
+                    }
+                    //? send doctors info to database
+                    fetch('http://localhost:5000/doctor', {
+                        method: "POST",
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(doctor)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.insertedId) {
+                            toast.success('Succesfully registerd doctor.')
+                        }
+                    })
+                }
+            })
     };
 
     return (
@@ -87,7 +101,7 @@ const AddDoctor = () => {
                         <span className="label-text">Specialization</span>
                     </label>
                     <select
-                        class="select select-bordered w-full max-w-xs"
+                        className="select select-bordered w-full max-w-xs"
                         {...register('specialization', {
                             required: {
                                 value: true,
@@ -96,7 +110,7 @@ const AddDoctor = () => {
                         })}
                     >
                         {
-                            appointment.map(appoint => (
+                            appointment?.map(appoint => (
                                 <option key={appoint._id} value={appoint.name}>
                                     {appoint.name}
                                 </option>

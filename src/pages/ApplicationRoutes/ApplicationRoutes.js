@@ -10,6 +10,8 @@ import MyAppointments from './../../components/MyAppointments/MyAppointments';
 import Account from './../../components/Account/Account';
 import AllUsers from './../../components/AllUsers/AllUsers';
 import AddDoctor from './../../components/AddDoctor/AddDoctor';
+import ManageDoctor from './../../components/ManageDoctor/ManageDoctor';
+import Payment from './../../components/Payment/Payment';
 
 
 const ApplicationRoutes = () => {
@@ -30,6 +32,8 @@ const ApplicationRoutes = () => {
                 <Route path="account" element={<Account />} />
                 <Route path="all-users" element={<AllUsers />} />
                 <Route path="add-doctor" element={<AddDoctor />} />
+                <Route path="manage-doctor" element={<ManageDoctor />} />
+                <Route path="payment/:id" element={<Payment />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
